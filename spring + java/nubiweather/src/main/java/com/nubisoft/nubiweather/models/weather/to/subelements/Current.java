@@ -1,4 +1,4 @@
-package com.nubisoft.nubiweather.models.weather.subelements;
+package com.nubisoft.nubiweather.models.weather.to.subelements;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -18,7 +18,4 @@ public class Current {
     private Condition condition;
     @JsonProperty("wind_kph")
     private BigDecimal windKph;
-    private int cloud;
-    @JsonProperty("gust_kph")
-    private BigDecimal gustKph;
 }

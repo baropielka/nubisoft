@@ -1,4 +1,4 @@
-package com.nubisoft.nubiweather.models.weather.subelements;
+package com.nubisoft.nubiweather.models.weather.to.subelements;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

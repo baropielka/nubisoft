@@ -1,4 +1,4 @@
-package com.nubisoft.nubiweather.models.weather.subelements;
+package com.nubisoft.nubiweather.models.weather.to.subelements;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package com.nubisoft.nubiweather.models.weather.subelements;
+package com.nubisoft.nubiweather.models.weather.to.subelements;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-public class ForecastDay {
-    private String date;
-    private Day day;
+public class Location {
+    private String name;
+    private String country;
 }
