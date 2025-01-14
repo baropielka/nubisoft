@@ -1,0 +1,93 @@
+<div class="container mt-2">
+  <div class="row text-center mb-3">
+    <h1></h1>
+  </div>
+
+
+  <div class="row justify-content-center">
+
+    <div class="card text-center" style="width: 50rem;">
+      <div class="card-body">
+        <h5 class="card-title">Weather App</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Welcome to the Weather App</h6>
+        <p class="card-text">Unfortunately there was no Angular in the front-end technology stack, but I have some
+          experience in it, so I've decided to make simple Angular front-end to showcase my skills.</p>
+
+        <div class="row justify-content-center">
+          <div class="card mx-2" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Weather in Gliwice</h5>
+              <button
+                type="button"
+                class="btn btn-primary mb-2"
+                (click)="getWeather('Gliwice')"
+              >Get weather</button>
+              <h5 class="card-title">Weather in Hamburg</h5>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="getWeather('Hamburg')"
+              >Get weather</button>
+            </div>
+          </div>
+
+          <div class="card mx-2" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Forecast in Gliwice </h5>
+              <button
+                type="button"
+                class="btn btn-primary mb-2"
+                (click)="getForecast('Gliwice')"
+              >Get forecast</button>
+              <h5 class="card-title">Forecast in Hamburg</h5>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="getForecast('Hamburg')"
+              >Get forecast</button>
+            </div>
+          </div>
+        </div>
+
+        <form [formGroup]="weatherChoiceFormGroup">
+          <div class="row justify-content-center">
+            <div class="card mx-2 mt-3" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Weather in:</h5>
+                <input
+                  formControlName="currentCity"
+                  class="form-control"
+                  placeholder="Enter city name">
+                <button
+                  type="button"
+                  class="btn btn-primary mt-4"
+                  (click)="getWeather()"
+                  [disabled]="!isWeatherButtonActive"
+                >Get weather</button>
+              </div>
+            </div>
+
+            <div class="card mx-2 mt-3" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Forecast in:</h5>
+                <input
+                  formControlName="forecastCity"
+                  class="form-control"
+                  placeholder="Enter city name">
+                <button
+                  type="button"
+                  class="btn btn-primary mt-4"
+                  (click)="getForecast()"
+                  [disabled]="!isForecastButtonActive"
+                >Get forecast</button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+

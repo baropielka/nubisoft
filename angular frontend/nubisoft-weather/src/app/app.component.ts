@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {WeatherPanelComponent} from './weather-panel/weather-panel.component';
+import {Component} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {RouterOutlet} from '@angular/router';
+import {NavbarComponent} from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
   imports: [
-    WeatherPanelComponent
+    ReactiveFormsModule,
+    RouterOutlet,
+    NavbarComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'nubisoft-weather';
+
 }
