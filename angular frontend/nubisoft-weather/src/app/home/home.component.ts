@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
   isForecastButtonActive = false;
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router) {
+    private readonly fb: FormBuilder,
+    private readonly router: Router) {
   }
 
   ngOnInit(): void {
