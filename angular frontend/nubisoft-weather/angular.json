@@ -67,6 +67,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 2137
+          },
           "configurations": {
             "production": {
               "buildTarget": "nubisoft-weather:build:production"

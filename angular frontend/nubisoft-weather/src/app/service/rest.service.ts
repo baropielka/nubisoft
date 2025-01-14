@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {WeatherDataDTO} from '../models/WeatherDataDTO';
 import {BACKEND_WEATHER_URL} from '../constatnts/AppConstants';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestService {
 
-  constructor(private http: HttpClient) {
+  constructor(private readonly http: HttpClient) {
   }
 
   public getWeather(city: string) {

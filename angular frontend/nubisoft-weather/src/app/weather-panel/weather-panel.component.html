@@ -1,1 +1,31 @@
+<div class="card col-8 text-center mx-auto mt-3 bg-light">
+  <div class="card-body">
+    <h5 class="card-title"><span>{{forecastMode ? 'Forecast of weather in ' : 'Weather in '}}</span> <span>{{weatherData.location.name}}</span></h5>
 
+    @if (!forecastMode) {
+      <div>
+        <h6 class="card-subtitle mb-2 text-muted">Current conditions</h6>
+        <p class="card-text"><span>{{weatherData.current.condition.text}}</span><img src="{{weatherData.current.condition.icon}}"></p>
+        <p class="card-text">Temperaure: {{weatherData.current.temp_c}} *C</p>
+        <p class="card-text">Wind speed: {{weatherData.current.wind_kph}} km/h</p>
+      </div>
+    } @else {
+      <div class="row justify-content-center">
+        <h6 class="card-subtitle mb-2 text-muted">Forecast</h6>
+
+        @for (day of weatherData.forecast.forecastday; track day.date) {
+          <div class="card mx-2 mb-4 col-5">
+            <div class="card-body">
+              <h5 class="card-title">{{day.date}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted"><span>{{day.day.condition.text}}</span><img src="{{day.day.condition.icon}}"></h6>
+              <p class="card-text">Minimal temperature: {{day.day.mintemp_c}} *C</p>
+              <p class="card-text">Maximal temperature: {{day.day.maxtemp_c}} *C</p>
+              <p class="card-text">Average temperature: {{day.day.avgtemp_c}} *C</p>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</div>

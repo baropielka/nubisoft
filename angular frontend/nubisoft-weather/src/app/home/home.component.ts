@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Router} from '@angular/router';
-import {noop} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -37,20 +36,22 @@ export class HomeComponent implements OnInit {
 
   getWeather(city?: string) {
     if (city) {
-      this.router.navigate(['/weather/current/', city]).then(noop);
+      city = this.replaceSpecialChars(city)
+      this.router.navigate(['/weather/current/', city]);
     } else {
-      const cityFromForm = this.weatherChoiceFormGroup.get('currentCity')?.value;
-      this.router.navigate(['/weather/current/', cityFromForm]).then(noop);
+      const cityFromForm = this.replaceSpecialChars(this.weatherChoiceFormGroup.get('currentCity')?.value);
+      this.router.navigate(['/weather/current/', cityFromForm]);
 
     }
   }
 
   getForecast(city?: string) {
     if (city) {
-      this.router.navigate(['/weather/forecast/', city]).then(noop);
+      city = this.replaceSpecialChars(city)
+      this.router.navigate(['/weather/forecast/', city]);
     } else {
-      const cityFromForm = this.weatherChoiceFormGroup.get('forecastCity')?.value;
-      this.router.navigate(['/weather/current/', cityFromForm]).then(noop);
+      const cityFromForm = this.replaceSpecialChars(this.weatherChoiceFormGroup.get('forecastCity')?.value);
+      this.router.navigate(['/weather/forecast/', cityFromForm]);
 
     }
   }
@@ -67,5 +68,21 @@ export class HomeComponent implements OnInit {
       this.weatherChoiceFormGroup.get('currentCity')?.patchValue('', {emitEvent: false});
       this.isWeatherButtonActive = false;
     });
+  }
+
+  private replaceSpecialChars(str: string): string {
+    const specialCharsMap: Record<string, string> = {
+      'ą': 'a',
+      'ć': 'c',
+      'ę': 'e',
+      'ł': 'l',
+      'ń': 'n',
+      'ó': 'o',
+      'ś': 's',
+      'ź': 'z',
+      'ż': 'z',
+    };
+
+    return str.replace(/[ąćęłńóśźżäöüß]/g, (char) => specialCharsMap[char] || char);
   }
 }
