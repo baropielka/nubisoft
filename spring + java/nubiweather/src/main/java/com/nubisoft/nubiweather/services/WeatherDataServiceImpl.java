@@ -6,9 +6,15 @@ import com.nubisoft.nubiweather.repositories.ForecastDayRepository;
 import com.nubisoft.nubiweather.repositories.WeatherDataRepository;
 import com.nubisoft.nubiweather.services.api.WeatherDataService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -26,29 +32,31 @@ public class WeatherDataServiceImpl implements WeatherDataService {
     }
 
     @Override
-    public WeatherDataTo getCurrentWeather(String city, String apiKey) {
-        validateInputParameters(city, apiKey);
-        String url = "http://api.weatherapi.com/v1/current.json?key=%s&q=%s&aqi=no".formatted(apiKey, city);
+    @Validated
+    public WeatherDataTo getCurrentWeather(@NotNull String city, @NotNull String apiKey, @NotNull String apiUrl) {
+        String url = "%s/current.json?key=%s&q=%s&aqi=no".formatted(apiUrl, apiKey, city);
         return getResponseEntity(url);
     }
 
     @Override
-    public WeatherDataTo getWeatherForecast(String city, String apiKey, int days) {
-        validateInputParameters(city, apiKey);
-        String url = "http://api.weatherapi.com/v1/forecast.json?key=%s&q=%s&days=%s&aqi=no&alerts=no".formatted(apiKey, city, days);
+    @Validated
+    public WeatherDataTo getWeatherForecast(@NotNull String city, @NotNull String apiKey, @Min(1) @Max(10) int days, @NotNull String apiUrl) {
+        String url = "%s/forecast.json?key=%s&q=%s&days=%s&aqi=no&alerts=no".formatted(apiUrl, apiKey, city, days);
         return getResponseEntity(url);
+    }
+
+    @Override
+    public List<WeatherDataTo> getLastSearches() {
+        return weatherDataRepository.findAll()
+                .stream()
+                .map(WeatherDataMapper::mapToWeatherDataTo)
+                .toList();
     }
 
     private WeatherDataTo getResponseEntity(String url) {
         WeatherDataTo weatherInfoTo = restTemplate.getForObject(url, WeatherDataTo.class);
-            keepLastTenSearches(weatherInfoTo);
+        keepLastTenSearches(weatherInfoTo);
         return weatherInfoTo;
-    }
-
-    private void validateInputParameters(String city, String apiKey) {
-        if (city == null || apiKey == null) {
-            throw new NullPointerException();
-        }
     }
 
     private void keepLastTenSearches(WeatherDataTo weatherInfoTo) {
@@ -59,7 +67,7 @@ public class WeatherDataServiceImpl implements WeatherDataService {
     private void deleteSearchData() {
         // Note for reviewer: I did removal mechanism based on lowest id, but if createDate parameter was there, I would use it instead
         long numberOfSearchesSaved = weatherDataRepository.count();
-        if (numberOfSearchesSaved >= 10) {
+        if (numberOfSearchesSaved >= 12) {
             Long lowestId = weatherDataRepository.findLowestId();
             forecastDayRepository.deleteByWeatherDataId(lowestId);
             weatherDataRepository.deleteById(lowestId);

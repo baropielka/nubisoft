@@ -21,8 +21,8 @@ public class WebClientConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:2137")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("GET")
                         .allowedHeaders("*")
                         .allowCredentials(true);
             }

@@ -50,7 +50,7 @@ class WeatherDataServiceImplTest {
         when(restTemplate.getForObject(anyString(), any())).thenReturn(mockResponse);
 
         // when
-        WeatherDataTo result = weatherService.getCurrentWeather(city, apiKey);
+        WeatherDataTo result = weatherService.getCurrentWeather(city, apiKey, "");
 
         // Assert
         SoftAssertions softly = new SoftAssertions();
@@ -68,7 +68,7 @@ class WeatherDataServiceImplTest {
         String apiKey = "test-api-key";
 
         // when & then
-        assertThrows(NullPointerException.class, () -> weatherService.getCurrentWeather(city, apiKey));
+        assertThrows(NullPointerException.class, () -> weatherService.getCurrentWeather(city, apiKey, ""));
     }
 
     @Test
@@ -78,7 +78,7 @@ class WeatherDataServiceImplTest {
         String apiKey = null;
 
         // when & then
-        assertThrows(NullPointerException.class, () -> weatherService.getCurrentWeather(city, apiKey));
+        assertThrows(NullPointerException.class, () -> weatherService.getCurrentWeather(city, apiKey, ""));
     }
 
     @Test
@@ -89,7 +89,7 @@ class WeatherDataServiceImplTest {
         int days = 3;
 
         // when & then
-        assertThrows(NullPointerException.class, () -> weatherService.getWeatherForecast(city, apiKey, days));
+        assertThrows(NullPointerException.class, () -> weatherService.getWeatherForecast(city, apiKey, days, ""));
     }
 
     @Test
@@ -100,7 +100,7 @@ class WeatherDataServiceImplTest {
         int days = 3;
 
         // when & then
-        assertThrows(NullPointerException.class, () -> weatherService.getWeatherForecast(city, apiKey, days));
+        assertThrows(NullPointerException.class, () -> weatherService.getWeatherForecast(city, apiKey, days, ""));
     }
 
     private WeatherDataTo createMockWeatherData() {

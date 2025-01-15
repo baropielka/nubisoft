@@ -4,7 +4,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class WeatherDataEntity extends AbstractEntity {
     @Column
     private String name;
@@ -28,6 +26,8 @@ public class WeatherDataEntity extends AbstractEntity {
     private BigDecimal currentWindKph;
     @Column
     private String currentWeatherCondition;
+    @Column
+    private String currentWeatherIconLink;
 
     @OneToMany(
             mappedBy = "weatherData",

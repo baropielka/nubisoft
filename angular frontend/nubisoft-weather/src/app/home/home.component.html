@@ -85,6 +85,19 @@
 
       </div>
     </div>
+
+    <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">Your last searches:</h5>
+        <div class="row row-cols-3 g-2">
+          @for (searchResult of lastSearches.reverse(); track $index) {
+            <app-weather-panel
+              [weatherData]="searchResult"
+            ></app-weather-panel>
+          }
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

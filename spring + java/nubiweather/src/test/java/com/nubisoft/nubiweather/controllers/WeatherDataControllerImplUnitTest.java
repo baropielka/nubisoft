@@ -47,7 +47,7 @@ public class WeatherDataControllerImplUnitTest {
         mockResponse.setLocation(location);
         mockResponse.setCurrent(current);
 
-        when(weatherDataService.getCurrentWeather(any(), any())).thenReturn(mockResponse);
+        when(weatherDataService.getCurrentWeather(any(), any(), any())).thenReturn(mockResponse);
 
         // when
         WeatherDataTo result = weatherController.getCurrentWeather(city);
@@ -81,7 +81,7 @@ public class WeatherDataControllerImplUnitTest {
         mockResponse.setLocation(location);
         mockResponse.setForecast(forecast);
 
-        when(weatherDataService.getWeatherForecast(any(), any(), anyInt())).thenReturn(mockResponse);
+        when(weatherDataService.getWeatherForecast(any(), any(), anyInt(), any())).thenReturn(mockResponse);
 
         // when
         WeatherDataTo result = weatherController.getWeatherForecast(city, days);

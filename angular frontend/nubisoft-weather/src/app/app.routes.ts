@@ -5,6 +5,7 @@ import {
   currentWeatherDataResolver,
   weatherForecastDataResolver
 } from './weather-panel/resolver/current-weather-data.resolver';
+import {lastSearchesResolver} from './home/last-searches.resolver';
 
 export const routes: Routes = [
   {
@@ -23,7 +24,10 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    resolve: {
+      lastSearches: lastSearchesResolver
+    }
   },
   {
     path: '**',

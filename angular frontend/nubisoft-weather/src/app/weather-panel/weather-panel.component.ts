@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WeatherDataDTO} from '../models/WeatherDataDTO';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -15,6 +15,7 @@ import {of} from 'rxjs';
 })
 export class WeatherPanelComponent implements OnInit {
 
+  @Input()
   weatherData!: WeatherDataDTO;
   forecastMode!: boolean;
 
@@ -22,7 +23,9 @@ export class WeatherPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadWeatherData();
+    if (!this.weatherData) {
+      this.loadWeatherData();
+    }
   }
 
   private loadWeatherData() {
@@ -38,6 +41,4 @@ export class WeatherPanelComponent implements OnInit {
       }
     })
   }
-
-  protected readonly of = of;
 }
